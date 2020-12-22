@@ -11,10 +11,20 @@ const { Media } = require('../models');
 /* GET Image */
 
 router.get('/', async (req, res) => {
-    const media = await Media.findAll();
+    const media = await Media.findAll({
+        attributes: ['id','image']
+
+});
+
+
+    const mappedMedia = media.map((m) => {
+        m.image = `${req.get('host')}/images/${m.image}`;
+        return m ;
+    });
+
     return res.json({
         status : 'success',
-        data : media
+        data : mappedMedia
     });
 });
 
@@ -29,7 +39,7 @@ router.post('/', (req, res) => {
     
     base64Img.img(image, './public/images', Date.now(), async (err, filepath) => {
         if (err) {
-            return res.status(400).json({ status: 'error',message : res.message });
+            return res.status(400).json({ status: 'error',message : err.message });
         }
 
             /*  file name image di split bentuk array*/
@@ -37,7 +47,7 @@ router.post('/', (req, res) => {
     const filename = filepath.split("\\").pop().split("/").pop();
 
             /* menyimpan file image */
-    const media = await Media.create({ image: `image/${filename}` });
+    const media = await Media.create({ image: `images/${filename}` });
 
     return res.json({
         status: 'success',
