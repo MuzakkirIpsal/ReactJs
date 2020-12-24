@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); //pangggil bcrypt untuk ngehes password
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
