@@ -8,6 +8,7 @@ const mediaHandler = require('./handler/media');
 //panggil router
 router.post('/', mediaHandler.create);
 router.get('/', mediaHandler.getAll);
+router.delete('/:id', mediaHandler.destroy);
 
 
 module.exports = router;

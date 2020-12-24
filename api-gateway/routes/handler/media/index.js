@@ -3,8 +3,10 @@
 //panggil media.js
 const create = require('./create');
 const getAll = require('./getAll');
+const destroy = require('./destroy');
 
 module.exports={
     create,
-    getAll
+    getAll,
+    destroy
 };
