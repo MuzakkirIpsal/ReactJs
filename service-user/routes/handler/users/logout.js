@@ -5,9 +5,8 @@ const {
 
 module.exports = async (req, res) => {
     const userId = req.body.user_id;
-    //const tokenId = req.body.user_id
-    try {
 
+    //const tokenId = req.body.user_id
         const user = await User.findByPk(userId);
         if(!user) {
             return res.status(404).json({
@@ -16,24 +15,22 @@ module.exports = async (req, res) => {
             });
         }
         
-    } catch (error) {
-        return res.status(500).json({
-            status : 'error',
-            message :error.message             
-        });        
-    }
+        // return res.status(500).json({
+        //     status : 'error',
+        //     message :error.message             
+        // });        
     
  
-        const token = await RefreshToken.findOne({
-            where : { user_id : userId}        
-        });
+        // const token = await RefreshToken.findOne({
+        //     where : { user_id : userId}        
+        // });
         
-        if (!token) {
-            return res.status(404).json({
-                status : 'error',
-                message : 'token sebelumnya sudah di deleted'
-            });
-        }
+        // if (!token) {
+        //     return res.status(404).json({
+        //         status : 'error',
+        //         message : 'token sebelumnya sudah di deleted'
+        //     });
+        // }
 
         await RefreshToken.destroy({
             where : { user_id : userId}
