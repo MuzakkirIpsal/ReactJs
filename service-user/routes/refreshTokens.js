@@ -11,7 +11,7 @@ router.post('/', refreshTokensHandler.create);
 
 /* panggil router getToken.js */
 
-// router.get('/', refreshTokensHandler.getToken );
+router.get('/', refreshTokensHandler.getToken );
 
 
 
