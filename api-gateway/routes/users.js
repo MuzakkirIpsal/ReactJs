@@ -4,10 +4,14 @@ const router = express.Router();
 
 
 const userHandler = require('./handler/users');
+const verifyToken = require('../middlewares/verifyToken');
+
 
 //panggil router
 router.post('/register', userHandler.register);
 router.post('/login', userHandler.login);
+router.put('/', verifyToken, userHandler.update);
+
 
 
 // router.get('/', mediaHandler.getAll);
